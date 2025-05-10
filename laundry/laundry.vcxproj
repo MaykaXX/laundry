@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="laundry.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="instruction.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

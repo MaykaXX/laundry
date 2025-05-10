@@ -2,53 +2,72 @@
 #include <windows.h>
 #include <string>
 #include <map>
-
-using namespace std;
+#include <fstream>
 
 void list_activity();
+void which_one();
 
 int main() {
     SetConsoleOutputCP(65001); // Поддержка Юникода для вывода emoji
-    cout << "Привет, это прачечная!🫧\n\n";
+    std::cout << "Привет, это прачечная!🫧\n\n";
     list_activity();
 }
 
 void list_activity() {
-    map<int, string> activities;
+    std::map<int, std::string> activities;
     activities[1] = "Обучение";
     activities[2] = "Стирать одежду 👕";
     activities[3] = "Ждать посетителей 👀";
     activities[4] = "Сушить одежду 🍃";
     activities[5] = "Сложить всё красиво 🌻";
+    activities[6] = "Ничего";
 
     for (const auto& pair : activities) {
-        cout << pair.first << " " << pair.second << endl;
+        std::cout << pair.first << " " << pair.second << std::endl;
     }
-
+    which_one();  
+}
+void which_one() {
     int choose;
+    std::cout << "Что хочешь сделать? ";
+    std::cin >> choose;
+    std::cout << std::endl;
 
-    cout << "Что хочешь сделать? ";
-    cin >> choose;
     if (choose == 1) {
-        cout << "\033[32mХорошо делай свою работу!\033[0m\n" << endl;
+        std::ifstream file("instruction.txt");
+        if (file.is_open()) {
+            std::string line;
+            while (std::getline(file, line)) {
+                std::cout << line << std::endl;
+            }
+            file.close();
+        }
+        std::cout << std::endl;
+        which_one();
     }
     else if (choose == 2) {
-
-        cout << "Одеждда стирается!" << endl;
+        std::cout << "Одеждда стирается!" << std::endl;
+        which_one();
     }
     else if (choose == 3) {
-        cout << "Порой время словно стоит на месте!" << endl;
+        std::cout << "Порой время словно стоит на месте!" << std::endl;
+        which_one();
     }
     else if (choose == 4) {
-        cout << "Если бы не сушильная машинка,\nодежда бы дружила с ветром!" << endl;
+        std::cout << "Если бы не сушильная машинка,\nодежда бы дружила с ветром!" << std::endl;
+        which_one();
     }
     else if (choose == 5) {
-        cout << "Все сложено идеально!" << endl;
+        std::cout << "Все сложено идеально!" << std::endl;
+        which_one();
+    }
+    else if (choose == 6) {
+        std::cout << "Хорошо, до встречи!🌞\n";
+    }
+    else {
+        std::cout << "ОЙ, ты нажал что-то другое!" << std::endl;
+        which_one();
     }
 
-    cout << "\nТы выбрал" << choose << endl;
+
 }
-
-
-
-    

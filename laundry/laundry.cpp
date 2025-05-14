@@ -3,13 +3,17 @@
 #include <string>
 #include <map>
 #include <fstream>
+#include "termcolor.hpp"
+
+
 
 void list_activity();
 void which_one();
+void code_for_washing();
 
 int main() {
     SetConsoleOutputCP(65001); // Поддержка Юникода для вывода emoji
-    std::cout << "Привет, это прачечная!🫧\n\n";
+    std::cout << termcolor::bright_magenta << "Добро пожаловать в прачечную!🧺\nЗдесь всё крутится вокруг чистоты и уюта\nПрочти краткую инструкцию и помоги первым клиентам освежить свой день!🌞🫧\n\n" << termcolor::reset;
     list_activity();
 }
 
@@ -46,7 +50,7 @@ void which_one() {
         which_one();
     }
     else if (choose == 2) {
-        std::cout << "Одеждда стирается!" << std::endl;
+        code_for_washing();
         which_one();
     }
     else if (choose == 3) {
@@ -69,5 +73,19 @@ void which_one() {
         which_one();
     }
 
+}
+void code_for_washing() {
+    std::cout << "Введи код для стиарльной машины: ";
+    int code;
+    std::cin >> code;
+    if (code != 1010) {
+        std::cout << "Код не верный!";
+    }
+    else {
+        std::cout << "Одеждда стирается!" << std::endl;
+    }
+}
 
+void good_day() {
+    std::cout << "Пожелать хорошего дня" << termcolor::blue << "(space + enter)" << termcolor::reset << std::endl;
 }

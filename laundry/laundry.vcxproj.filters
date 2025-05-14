@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\termcolor/">
+      <UniqueIdentifier>{7288a78e-f953-4590-a44a-0e24275bda4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="laundry.cpp">
@@ -21,5 +24,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="instruction.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="termcolor.hpp">
+      <Filter>Source Files\termcolor/</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

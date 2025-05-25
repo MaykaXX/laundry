@@ -1,2 +1,3 @@
 ﻿  laundry.cpp
+C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(204,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   laundry.vcxproj -> C:\Users\tik90\source\repos\laundry\x64\Debug\laundry.exe

@@ -11,6 +11,10 @@
 #include <chrono>
 #include <thread>
 #include <functional>
+#include <algorithm>
+#include <random>
+#include <limits>
+#undef max
 
 
 void slowPrint(const std::string& text, int delay = 10) {
@@ -72,9 +76,9 @@ public:
 
     void showTime() const {
         if (minutes > 9)
-            std::cout << "День " << day << ", " << hour << ":" << minutes << std::endl;
+            std::cout << "День " << day << ", " << hour << ":" << minutes << std::endl << std::endl;
         else
-            std::cout << "День " << day << ", " << hour << ":" << "0" << minutes << std::endl;
+            std::cout << "День " << day << ", " << hour << ":" << "0" << minutes << std::endl << std::endl;
     }
 
     bool isDaytime() const {
@@ -197,19 +201,109 @@ public:
 class Laundry {
 private:
     std::string us_name;
+    int max_number_of_customers = 0, number_of_customers = 0, amount_clothing_dirty = 0, amount_clothing_clean = 0, wallet = 0;
+    float price_washing = 2, price_drying = 1, fine = 0; // $
+    // рандомное максимальное к-во покупателей за день (max_number_of_customers)
+    // сколько ты сам обслужил покупателей (number_of_customers)
+
 protected:
     bool iscamera;
 public:
     GameClock clock;
     Laundry(const std::string& name) : us_name(name), iscamera(false), clock() {}
-    
+
 
     void check_day() {
         if (clock.day < 5) {
             iscamera = false;
         }
     }
-    
+
+    void customers() {
+        struct Customers {
+            std::string name;
+            std::string text;
+        };
+
+        std::vector<Customers> customer = {
+            {"👩‍🦰 Ольга", "Здравствуйте! У меня здесь бельё с отпуска песок - повсюду!"},
+            {"🧔 Владимир", "Надеюсь, сегодня машинка не съест ещё один носок..."},
+            {"👧 София", "Мам, а можно стирать игрушки?🧸"},
+            {"🧑‍🔧 Игорь", "Привет! Кто-то опять забыл ключи от сушилки..."},
+            {"👵 Бабушка Зина", "Сначала всё кипятком, потом полоскать - как в старые добрые времена!"},
+            {"📚 Марк", "Я пока постираю, заодно диплом напишу..."},
+            {"🎨 Анна", "Кто-то случайно не находил розовый платок в горошек? 🎀"},
+            {"🐱 Кот Борис", "Мяу! Не трогайте мой плед, он пахнет мною!"},
+            {"🧘‍♂️ Алексей", "Стирать - это как медитация. Тепло, белый шум, аромат свежести..."},
+            {"💃 Ника", "Пока бельё крутится, я пойду попрактикую бачату!"},
+            {"👨‍💼 Артём", "Я пришёл строго по расписанию. Надеюсь, никто не занял мою машинку!"},
+            {"🧕 Амина", "Вода пахнет жасмином? Или это мой кондиционер снова пролился..."},
+            {"👨‍🍳 Павел", "Шеф-повар не может позволить себе грязный фартук!"},
+            {"👩‍🎤 Лана", "Бельё постираю - и сразу на репетицию. Барабаны не ждут!"},
+            {"👨‍🌾 Николай", "Сначала навоз, потом стирка... Хорошо, что в этом порядке!"},
+        };
+
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> distrib(0, customer.size() - 1);
+        int index = distrib(gen);
+
+        const Customers& c = customer[index];
+
+        std::cout << termcolor::yellow << c.name << ": " << termcolor::reset;
+        slowPrint(c.text);
+        std::cout << std::endl;
+    }
+
+
+    void give_clothes() {
+        int salary;
+        std::string give;
+        while (true) {
+            std::cout << termcolor::green << "[отдать одежду(да/нет)]: " << termcolor::reset;
+            std::cin >> give;
+            std::cout << std::endl;
+            if (give == "нет") {
+                std::cout << "Клиенты не любят долго ждать! Они заплатят меньше" << std::endl;
+                fine += 0.5f;
+
+            }
+            else if (give == "да") {
+                good_day();
+             
+                if (fine == 0.0f) {
+                    salary = price_washing * amount_clothing_clean;
+                }
+                else {
+                    salary = (price_washing - fine) * amount_clothing_clean;
+                }
+                wallet += salary;
+                std::cout << "Ты заработал " << termcolor::yellow << salary << "$" << termcolor::reset << std::endl;
+            }
+                break;
+            }
+        }
+
+
+    void good_day() {
+        std::string wish;
+        std::cout << "[пожелать хорошего дня🌞]" << termcolor::blue << "(space + enter)" << termcolor::reset << std::endl;
+        
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+
+        std::getline(std::cin, wish); // читаем строку с пробелами
+        
+        std::cout << std::endl;
+        std::string user = "👤" + us_name + ": " + "хорошего дня! 🌞";
+        slowPrint(user);
+
+        if (wish != " ") {
+            std::cout << "Попробуй еще раз (сначало space, потом enter)" << std::endl;
+            good_day();
+        }
+    }
+
     std::pair<std::map<int, std::string>, std::map<int, std::function<void()>>> getAvailableActions() {
         std::map<int, std::string> activities;
         std::map<int, std::function<void()>> actions;
@@ -229,9 +323,20 @@ public:
 
         activities[2] = "Стирать одежду 👕";
         actions[2] = [this]() {
-            code_for_washing();
-            clock.advanceTime(2, 0);
-            };
+            if (amount_clothing_dirty > 0) {
+                code_for_washing();
+                clock.advanceTime(2, 0);
+                amount_clothing_clean = amount_clothing_dirty;
+                amount_clothing_dirty = 0;
+                std::cout << "Одежда постирана!" << std::endl;
+
+                give_clothes();
+            }
+            else {
+                std::cout << "У тебя нет что стирать!" << std::endl;
+            }
+        };
+
 
         activities[3] = "Ждать посетителей 👀";
         actions[3] = [this]() {
@@ -240,6 +345,8 @@ public:
                 WatchingBirds birds;
                 birds.random_meet();
             }
+            customers();
+            amount_clothing_dirty += 1;
             clock.advanceTime(1, 0);
             };
 
@@ -249,13 +356,23 @@ public:
             clock.advanceTime(0, 30);
             };
 
+        activities[5] = "Посмотреть в кошелек 💰";
+        actions[5] = [this]() {
+            if (wallet != 0)
+                std::cout << "У тебя " << termcolor::yellow << wallet << "$" << termcolor::reset << std::endl;
+            else
+                std::cout << "Да здесь одни мухи!🪰🕸️" << std::endl; 
+            };
+
         if (clock.day >= 3) {
-            activities[5] = "Сушить одежду 🍃";
-            actions[5] = [this]() {
+            activities[6] = "Сушить одежду 🍃";
+            actions[6] = [this]() {
                 std::cout << "Если бы не сушильная машинка,\nодежда бы дружила с ветром!" << std::endl;
                 clock.advanceTime(2, 0);
                 };
         }
+
+
 
         int exitIndex = static_cast<int>(activities.size()) + 1;
         activities[exitIndex] = "Ничего";
@@ -339,16 +456,12 @@ public:
         }
     }
 
-    void good_day() {
-        std::cout << "Пожелать хорошего дня" << termcolor::blue << "(space + enter)" << termcolor::reset << std::endl;
-    }
+                                    /*Статус для стиралной машины и сушильной
+                                    [пустая], [загружена], [стирается/сушится], [неисправна(шанс)]
 
-    /*Статус для стиралной машины и сушильной
-    [пустая], [загружена], [стирается/сушится], [неисправна(шанс)]
+                                    добавить уровень износа и возможность улучшить машины
 
-    добавить уровень износа и возможность улучшить машины
-
-    */
+                                    */
 };
 
 

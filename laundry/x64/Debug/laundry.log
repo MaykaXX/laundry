@@ -1,3 +1,10 @@
 ﻿  laundry.cpp
-C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(357,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(248,68): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(248,68): warning C4267:         with
+C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(248,68): warning C4267:         [
+C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(248,68): warning C4267:             _Ty=int
+C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(248,68): warning C4267:         ]
+C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(275,44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(278,53): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(472,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   laundry.vcxproj -> C:\Users\tik90\source\repos\laundry\x64\Debug\laundry.exe

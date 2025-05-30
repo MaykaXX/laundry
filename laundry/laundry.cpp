@@ -25,13 +25,14 @@ void slowPrint(const std::string& text, int delay = 10) {
     std::cout << std::endl;
 }
 
+class Laundry;
 class GameClock {
 private:
     int hour;
     int minutes;
     int day;
 public:
-    GameClock() : hour(8), minutes(00), day(1) {} // Игра начинается в 6 утра первого дня
+    GameClock() : hour(20), minutes(00), day(2) {} // Игра начинается в 6 утра первого дня
 
     void advanceTime(int hourToAdvance, int minutesToAdvance) {
         hour += hourToAdvance;
@@ -42,6 +43,10 @@ public:
             minutes -= 60;
         }
         
+        if (isNight())
+            go_to_bed();
+            
+
         while (hour >= 24) {
             hour -= 24;
             //minutes -= 60;
@@ -51,28 +56,27 @@ public:
     }
 
     void go_to_bed() {
-        if (isNight()) {
-            std::cout << "Тебе пора спать!" << std::endl << "Пойдешь?(да/нет) ";
-            std::string message;
-            std::cin >> message;
-            std::cout << std::endl;
-            if (message == "да") {
-                hour = 8;
-                minutes = 00;
-                day++;
-                std::cout << termcolor::magenta << "Наступил новый день! День " << day << termcolor::reset << std::endl;
-            }
-            else if (message == "нет") {
-                while (hour >= 24) {
-                    std::cout << "Ты слишком устал. Спокойной ночи🌙!";
-                    hour = 8;
-                    minutes = 00;
-                    day++;
-                    std::cout << termcolor::magenta << "Наступил новый день! День " << day << termcolor::reset << std::endl;
-                }
-            }
-        }
-    }
+         std::cout << "Тебе пора спать!" << std::endl << "Пойдешь?(да/нет) ";
+         std::string message;
+         std::cin >> message;
+         std::cout << std::endl;
+         if (message == "да") {
+             hour = 8;
+             minutes = 00;
+             day++;
+             std::cout << termcolor::magenta << "Наступил новый день! День " << day << termcolor::reset << std::endl;
+         }
+         else if (message == "нет") {
+             while (hour >= 24) {
+                 std::cout << "Ты слишком устал. Спокойной ночи🌙!";
+                 hour = 8;
+                 minutes = 00;
+                 day++;
+                 std::cout << termcolor::magenta << "Наступил новый день! День " << day << termcolor::reset << std::endl;
+                 
+             }
+         }
+     }
 
     void showTime() const {
         if (minutes > 9)
@@ -93,6 +97,13 @@ public:
 
 };
 
+class Village {
+public:
+    void message_village() {
+        std::cout << termcolor::bright_blue << "Ты в деревне" << termcolor::reset << std::endl;
+    }
+
+};
 
 class WatchingBirds {
 protected:
@@ -193,9 +204,7 @@ public:
 
         std::cout << rarity << termcolor::reset;
     }
-
-
-       
+      
 };
 
 class Laundry {
@@ -203,6 +212,7 @@ private:
     std::string us_name;
     int max_number_of_customers = 0, number_of_customers = 0, amount_clothing_dirty = 0, amount_clothing_clean = 0, wallet = 0;
     float price_washing = 2, price_drying = 1, fine = 0; // $
+    bool is_village = false, has_met_mustafa = false, has_met_vanessa = false, has_met_ayzuk = false;
     // рандомное максимальное к-во покупателей за день (max_number_of_customers)
     // сколько ты сам обслужил покупателей (number_of_customers)
 
@@ -211,7 +221,6 @@ protected:
 public:
     GameClock clock;
     Laundry(const std::string& name) : us_name(name), iscamera(false), clock() {}
-
 
     void check_day() {
         if (clock.day < 5) {
@@ -255,7 +264,6 @@ public:
         std::cout << std::endl;
     }
 
-
     void give_clothes() {
         int salary;
         std::string give;
@@ -284,13 +292,11 @@ public:
             }
         }
 
-
     void good_day() {
         std::string wish;
         std::cout << "[пожелать хорошего дня🌞]" << termcolor::blue << "(space + enter)" << termcolor::reset << std::endl;
         
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
 
         std::getline(std::cin, wish); // читаем строку с пробелами
         
@@ -304,12 +310,31 @@ public:
         }
     }
 
+    void process_washing() {
+        std::cout << "Процесс стирки..." << std::endl;
+        for (int i = 0; i < 10; ++i) {
+            Sleep(1500);
+            std::cout << "▊ ";
+        }
+        std::cout << "\nОдежда постирана!" << std::endl;
+    }
+    
+    void process_drying() {
+        std::cout << "Процесс сушки..." << std::endl;
+        for (int i = 0; i < 10; ++i) {
+            Sleep(1500);
+            std::cout << "▊ ";
+        }
+        std::cout << "\nОдежда высушена!" << std::endl;
+    }
+
     std::pair<std::map<int, std::string>, std::map<int, std::function<void()>>> getAvailableActions() {
         std::map<int, std::string> activities;
         std::map<int, std::function<void()>> actions;
 
-        activities[1] = "Обучение";
-        actions[1] = [this]() {
+        int nextIndex = 1;
+        activities[nextIndex] = "Обучение";
+        actions[nextIndex++] = [this]() {
             std::ifstream file("instruction.txt");
             if (file.is_open()) {
                 std::string line;
@@ -321,14 +346,14 @@ public:
             std::cout << std::endl;
             };
 
-        activities[2] = "Стирать одежду 👕";
-        actions[2] = [this]() {
+        activities[nextIndex] = "Стирать одежду 👕";
+        actions[nextIndex++] = [this]() {
             if (amount_clothing_dirty > 0) {
                 code_for_washing();
                 clock.advanceTime(2, 0);
                 amount_clothing_clean = amount_clothing_dirty;
                 amount_clothing_dirty = 0;
-                std::cout << "Одежда постирана!" << std::endl;
+                process_washing();
 
                 give_clothes();
             }
@@ -338,8 +363,8 @@ public:
         };
 
 
-        activities[3] = "Ждать посетителей 👀";
-        actions[3] = [this]() {
+        activities[nextIndex] = "Ждать посетителей 👀";
+        actions[nextIndex++] = [this]() {
             std::cout << "Порой время словно стоит на месте!" << std::endl;
             if (iscamera) {
                 WatchingBirds birds;
@@ -350,14 +375,14 @@ public:
             clock.advanceTime(1, 0);
             };
 
-        activities[4] = "Сложить всё красиво 🌻";
-        actions[4] = [this]() {
+        activities[nextIndex] = "Сложить всё красиво 🌻";
+        actions[nextIndex++] = [this]() {
             std::cout << "Все сложено идеально!" << std::endl;
             clock.advanceTime(0, 30);
             };
 
-        activities[5] = "Посмотреть в кошелек 💰";
-        actions[5] = [this]() {
+        activities[nextIndex] = "Посмотреть в кошелек 💰";
+        actions[nextIndex++] = [this]() {
             if (wallet != 0)
                 std::cout << "У тебя " << termcolor::yellow << wallet << "$" << termcolor::reset << std::endl;
             else
@@ -365,27 +390,34 @@ public:
             };
 
         if (clock.day >= 3) {
-            activities[6] = "Сушить одежду 🍃";
-            actions[6] = [this]() {
+            activities[nextIndex] = "Сушить одежду 🍃";
+            actions[nextIndex++] = [this]() {
                 std::cout << "Если бы не сушильная машинка,\nодежда бы дружила с ветром!" << std::endl;
                 clock.advanceTime(2, 0);
                 };
         }
 
-
-
+        if (is_village) {
+            activities[nextIndex] = "Пойти в деревню";
+            actions[nextIndex++] = [this]() {
+                Village village;
+                village.message_village();
+                clock.advanceTime(0, 10);
+                };
+        }
+       
         int exitIndex = static_cast<int>(activities.size()) + 1;
         activities[exitIndex] = "Ничего";
-        actions[exitIndex] = []() {
+        actions[exitIndex++] = []() {
             std::cout << "Хорошо, до встречи!🌞\n";
             };
 
         if (clock.isNight()) {
-            
             int sleepIndex = static_cast<int>(activities.size()) + 1;
-            activities[sleepIndex] = "Пойти спать 🌙";
-            actions[sleepIndex] = [this]() {
+            activities[exitIndex] = "Пойти спать 🌙";
+            actions[exitIndex++] = [this]() {
                 clock.go_to_bed();
+                list_activity();
                 };
         }
 
@@ -398,15 +430,12 @@ public:
         bool running = true;
         while (running) {
             special_events();
-            clock.go_to_bed();
             clock.showTime();
 
             auto actionsPair = getAvailableActions();
             auto activities = actionsPair.first;
             auto actions = actionsPair.second;
             int exitIndex = static_cast<int>(activities.size());
-
-
 
             for (const auto& pair : activities) {
                 std::cout << pair.first << " " << pair.second << std::endl;
@@ -433,13 +462,60 @@ public:
     void special_events() {
         switch (clock.day) {
         case 5: {
-            std::cout << termcolor::bright_blue << "👵 Ванесса: " << termcolor::reset;
-            std::string message = "Привет, " + us_name + " я тут убиралась на чердаке и нашла старый фотоапарат.\nМожет пригодится!";
-            std::cout << "Получен " << termcolor::bright_cyan << '[' << "фотоапарат" << ']' << termcolor::reset << std::endl;
+            if (!has_met_vanessa){
+                std::cout << termcolor::bright_blue << "👵 Ванесса: " << termcolor::reset;
+            std::string message = "Привет, " + us_name + ", я тут убиралась на чердаке и нашла старый фотоапарат.\nМожет пригодится!";
+            slowPrint(message, 40);
+
+            std::cout << "\nПолучен " << termcolor::bright_cyan << "[фотоапарат]\n" << termcolor::reset << std::endl;
             iscamera = true;
 
-            slowPrint(message , 40);
-            slowPrint("Теперь тебе доступен мир орнитологии");
+            Sleep(100);
+            std::cout << termcolor::italic << "Теперь тебе доступен мир орнитологии\n" << termcolor::reset;
+        }
+            break;
+        }
+        case 2: {
+            if (!has_met_mustafa) {
+                std::cout << termcolor::bright_blue << "👴 Мустафа: " << termcolor::reset;
+                std::string message = "Здравствуй! Вижу, ты у нас впервые. Наша деревня Каталин хоть и мала, да уютом славится.\nЗагляни в гости — поведаю тебе удивительные истории о здешних местах, а моя Ванесса пирог испечёт к чаю.\n"
+                    "Живём мы неподалёку, так что ещё обязательно встретимся!\n";
+                slowPrint(message);
+
+                Sleep(100);
+                is_village = true;
+                std::cout << termcolor::italic << "Открыта деревня\n" << termcolor::reset;
+                has_met_mustafa = true;
+                
+            }
+            break;
+        }
+        case 7: {
+            if (!has_met_ayzuk) {
+                std::cout << termcolor::bright_blue << "👦 Айзик: " << termcolor::reset;
+                std::string message = "Эээ... здрасьте! У меня тут, ну... очень деликатная проблема. Только маме ни слова, ладно?\n"
+                    "Короче, мне срочно надо постирать... двойку из дневника! В журнале 'Мастер на все руки' написано, что это сработает. Ну я и подумал — а вдруг?";
+                slowPrint(message, 50);
+
+                std::string diary;
+                std::cout << "\n[Взять дневник]" << termcolor::blue << "(space + enter)" << termcolor::reset << std::endl;
+
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                std::getline(std::cin, diary);
+
+                std::cout << termcolor::italic << "\nПолучен дневник Айзика" << termcolor::reset << std::endl;
+
+                process_washing();
+
+                std::cout << termcolor::bright_blue << "\n👦 Айзик: " << termcolor::reset;
+                std::string message1 = "\nОго! Получилось?! Ты волшебница, честное слово!\n"
+                    "Теперь мама точно не узнает... Наверное. Спасибо тебе огромное!\n"
+                    "Если что — я в долгу не останусь. У меня ещё кое-что надо... эээ... починить.";
+                slowPrint(message1);
+                std::cout << std::endl;
+                good_day();
+            }
         }
         }
     }
@@ -460,8 +536,7 @@ public:
                                     [пустая], [загружена], [стирается/сушится], [неисправна(шанс)]
 
                                     добавить уровень износа и возможность улучшить машины
-
-                                    */
+*/
 };
 
 

@@ -32,7 +32,7 @@ private:
     int minutes;
     int day;
 public:
-    GameClock() : hour(20), minutes(00), day(2) {} // Игра начинается в 6 утра первого дня
+    GameClock() : hour(8), minutes(00), day(1) {} // Игра начинается в 6 утра первого дня
 
     void advanceTime(int hourToAdvance, int minutesToAdvance) {
         hour += hourToAdvance;
@@ -210,7 +210,7 @@ public:
 class Laundry {
 private:
     std::string us_name;
-    int max_number_of_customers = 0, number_of_customers = 0, amount_clothing_dirty = 0, amount_clothing_clean = 0, wallet = 0;
+    int max_number_of_customers = 0, number_of_customers = 0, amount_clothing_dirty = 0, amount_clothing_clean = 0, wallet = 2, level_serviceability = 0;
     float price_washing = 2, price_drying = 1, fine = 0; // $
     bool is_village = false, has_met_mustafa = false, has_met_vanessa = false, has_met_ayzuk = false;
     // рандомное максимальное к-во покупателей за день (max_number_of_customers)
@@ -274,6 +274,7 @@ public:
             if (give == "нет") {
                 std::cout << "Клиенты не любят долго ждать! Они заплатят меньше" << std::endl;
                 fine += 0.5f;
+                give_clothes();
 
             }
             else if (give == "да") {
@@ -286,6 +287,7 @@ public:
                     salary = (price_washing - fine) * amount_clothing_clean;
                 }
                 wallet += salary;
+                amount_clothing_clean = 0;
                 std::cout << "Ты заработал " << termcolor::yellow << salary << "$" << termcolor::reset << std::endl;
             }
                 break;
@@ -348,17 +350,32 @@ public:
 
         activities[nextIndex] = "Стирать одежду 👕";
         actions[nextIndex++] = [this]() {
-            if (amount_clothing_dirty > 0) {
+            while (amount_clothing_dirty > 0 && level_serviceability > 0) {
                 code_for_washing();
                 clock.advanceTime(2, 0);
                 amount_clothing_clean = amount_clothing_dirty;
                 amount_clothing_dirty = 0;
+                level_serviceability -= 1;
                 process_washing();
 
                 give_clothes();
             }
-            else {
+            if(amount_clothing_dirty == 0) 
                 std::cout << "У тебя нет что стирать!" << std::endl;
+            if (level_serviceability == 0) {
+                std::cout << termcolor::italic << "Стиральная машина сломана!\nТребуется для починки 1$" << termcolor::reset << std::endl;
+                
+                std::string pay;
+                
+                std::cout << "[заплатить 1$]" << termcolor::blue << "(space + enter)" << termcolor::reset;
+                
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                std::getline(std::cin, pay);
+
+                wallet -= 1;
+                level_serviceability = 5;
+                std::cout << termcolor::italic << "Заплачено 1$\nУровень исправности стиральной машины: " << level_serviceability << termcolor::reset << std::endl;
             }
         };
 

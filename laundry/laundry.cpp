@@ -210,8 +210,8 @@ public:
 class Laundry {
 private:
     std::string us_name;
-    int max_number_of_customers = 0, number_of_customers = 0, amount_clothing_dirty = 0, amount_clothing_clean = 0, wallet = 2, level_serviceability = 0;
-    float price_washing = 2, price_drying = 1, fine = 0; // $
+    int max_number_of_customers = 0, number_of_customers = 0, amount_clothing_dirty = 0, amount_clothing_clean = 0, level_serviceability = 5;
+    float price_washing = 2.0f, price_drying = 1.0f, fine = 0, wallet = 0; // $
     bool is_village = false, has_met_mustafa = false, has_met_vanessa = false, has_met_ayzuk = false;
     // рандомное максимальное к-во покупателей за день (max_number_of_customers)
     // сколько ты сам обслужил покупателей (number_of_customers)
@@ -265,7 +265,7 @@ public:
     }
 
     void give_clothes() {
-        int salary;
+        float salary;
         std::string give;
         while (true) {
             std::cout << termcolor::green << "[отдать одежду(да/нет)]: " << termcolor::reset;
@@ -274,6 +274,7 @@ public:
             if (give == "нет") {
                 std::cout << "Клиенты не любят долго ждать! Они заплатят меньше" << std::endl;
                 fine += 0.5f;
+                std::cout << (price_washing - fine);
                 give_clothes();
 
             }
@@ -316,7 +317,7 @@ public:
         std::cout << "Процесс стирки..." << std::endl;
         for (int i = 0; i < 10; ++i) {
             Sleep(1500);
-            std::cout << "▊ ";
+            std::cout << "█ ";
         }
         std::cout << "\nОдежда постирана!" << std::endl;
     }

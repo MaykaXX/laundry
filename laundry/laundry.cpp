@@ -558,11 +558,30 @@ public:
         }
         std::cout << "\nОдежда высушена!" << std::endl;
     }
+    
+    void showMaykaRetroBanner() {
+        std::string banner = R"(
+                                                                  .---.        ____      ___    _ ,---.   .--. ______     .-------. 
+                      | ,_|      .'  __ `. .'   |  | ||    \  |  ||    _ `''. |  _ _   \      \   \   /  / 
+                    ,-./  )     /   '  \  \|   .'  | ||  ,  \ |  || _ | ) _  \| ( ' )  |       \  _. /  '  
+                    \  '_ '`)   |___|  /  |.'  '_  | ||  |\_ \|  ||( ''_'  ) ||(_ o _) /        _( )_ .'   
+                     > (_)  )      _.-`   |'   ( \.-.||  _( )_\  || . (_) `. || (_,_).' __  ___(_ o _)'    
+                    (  .  .-'   .'   _    |' (`. _` /|| (_ o _)  ||(_    ._) '|  |\ \  |  ||   |(_,_)'     
+                     `-'`-'|___ |  _( )_  || (_ (_) _)|  (_,_)\  ||  (_.\.' / |  | \ `'   /|   `-'  /      
+                      |        \\ (_ o _) / \ /  . \ /|  |    |  ||       .'  |  |  \    /  \      /       
+                      `--------` '.(_,_).'   ``-'`-'' '--'    '--''-----'`    ''-'   `'-'    `-..-'        
+                                                                                       
+        )";
+        std::cout << "\033[1;36m"; // Голубой стиль
+        slowPrint(banner, 1); 
+        std::cout << "\033[0m\n";
+    }
 
+    bool baner = true;
     std::pair<std::map<int, std::string>, std::map<int, std::function<void()>>> getAvailableActions() {
         std::map<int, std::string> activities;
         std::map<int, std::function<void()>> actions;
-
+           
         int nextIndex = 1;
         activities[nextIndex] = "Обучение";
         actions[nextIndex++] = [this]() {
@@ -819,17 +838,18 @@ int main() {
     SetConsoleOutputCP(65001); // Поддержка Юникода для вывода emoji
     srand(time(NULL));
     
+    std::string us_name;
+
+    Laundry laundry(us_name);
+    laundry.showMaykaRetroBanner();
+    
     std::cout << termcolor::bright_magenta << "Добро пожаловать в прачечную!🧺\nЗдесь всё крутится вокруг чистоты и уюта\nПрочти краткую инструкцию и помоги первым клиентам освежить свой день!🌞🫧\n\n" << termcolor::reset;
     
-    std::string us_name;
     std::cout << "Как тебя зовут: ";
     std::cin >> us_name;
     std::cout << "Добро пожаловать, "<< us_name << std::endl;
-
-
-    Laundry laundry(us_name);
-    laundry.list_activity();
     
-
+    laundry.list_activity();
+       
     return 0;
 }

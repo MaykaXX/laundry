@@ -424,6 +424,7 @@ public:
 
 class Laundry {
 private:
+    bool sock_hunt = false, has_found_sock_vladimir = false;
     std::string us_name;
     int max_number_of_customers = 0, number_of_customers = 0, amount_clothing_dirty = 0, amount_clothing_clean = 0, level_serviceability = 5;
     float price_washing = 2.0f, price_drying = 1.0f, fine = 0, wallet = 0; // $
@@ -443,15 +444,57 @@ public:
         }
     }
 
+    std::string user_text(std::string text) {
+        std::string user_name = "👤 " + us_name + ": ";
+        return user_name + text;
+    }
+
+    void wait_for_enter() {
+        std::cout << termcolor::blue << "(нажмите Enter)" << termcolor::reset << std::endl;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        std::cout << std::string(3, '\n'); //очищаем экран
+    }
+
     void customers() {
         struct Customers {
             std::string name;
             std::string text;
+            std::function<void()> interaction; // функция взаимодействия
         };
+        
 
         std::vector<Customers> customer = {
-            {"👩‍🦰 Ольга", "Здравствуйте! У меня здесь бельё с отпуска песок - повсюду!"},
-            {"🧔 Владимир", "Надеюсь, сегодня машинка не съест ещё один носок..."},
+            {"👩‍🦰 Ольга", "Здравствуйте! У меня здесь бельё с отпуска песок - повсюду!",
+                [this]() {
+                    slowPrint("💬 Ольга : Может у вас есть режим 'пляжная стирка'? ");
+                    
+                    std::cout << termcolor::bright_grey << "К сожалению, нету..." << termcolor::reset;
+                    wait_for_enter();
+                                            
+                    this->user_text("К сожалению, нету...");
+                }
+            },
+            {"🧔 Владимир", "",
+                [this]() {
+                    if (!has_found_sock_vladimir) {
+                        slowPrint("💬 Владимир: Надеюсь, сегодня машинка не съест ещё один носок...");
+
+                        std::cout << termcolor::blue << "НоВыЙ кВеСт ПоЛуЧеН!" << termcolor::reset << std::endl;
+                        std::cout << "💡 Найди второй носок владимира" << std::endl;
+                        std::cout << termcolor::bright_grey << "Кажется пора все хорошо сложить.." << termcolor::reset << std::endl;
+
+                        this->sock_hunt = true;
+                    }
+                    else {
+                        slowPrint("🧔 Владимир: Сегодня без сюрпризов. Одежда чистая, настроение — тоже.");
+                        std::cout << termcolor::bright_grey << "Будет сделано!" << termcolor::reset;
+                        wait_for_enter();
+
+                        this->user_text("Будет сделано!");
+                    }
+                }
+            },
             {"👧 София", "Мам, а можно стирать игрушки?🧸"},
             {"🧑‍🔧 Игорь", "Привет! Кто-то опять забыл ключи от сушилки..."},
             {"👵 Бабушка Зина", "Сначала всё кипятком, потом полоскать - как в старые добрые времена!"},
@@ -642,9 +685,22 @@ public:
 
         activities[nextIndex] = "Сложить всё красиво 🌻";
         actions[nextIndex++] = [this]() {
-            std::cout << "Все сложено идеально!" << std::endl;
-            clock.advanceTime(0, 30);
-            };
+            
+            if (sock_hunt == true) {
+                std::cout << termcolor::bright_cyan << "Носок найден!" << termcolor::reset << std::endl;
+                has_found_sock_vladimir = true;
+
+                std::cout << termcolor::bright_grey << "Отнести носок Владимиру" << termcolor::reset;
+                wait_for_enter();
+         
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+                slowPrint("🧔 Владимир: Я уже приготовился устраивать прощание. А тут — такой поворот!");
+            }
+            else {
+                std::cout << "Все сложено идеально!" << std::endl;
+                clock.advanceTime(0, 30);
+            }            
+        };
 
         activities[nextIndex] = "Посмотреть в кошелек 💰";
         actions[nextIndex++] = [this]() {

@@ -31,7 +31,9 @@ private:
     int hour;
     int minutes;
     int day;
-public:
+    int quality_customers_day = 0;
+
+public:     
     GameClock() : hour(8), minutes(00), day(1) {} // Игра начинается в 6 утра первого дня
 
     void advanceTime(int hourToAdvance, int minutesToAdvance) {
@@ -51,7 +53,9 @@ public:
             hour -= 24;
             //minutes -= 60;
             day++;
+            quality_customers_day = 0;
             std::cout << termcolor::magenta << "Наступил новый день! День " << day << termcolor::reset << std::endl;
+            random_qual_custom();
         }
     }
 
@@ -65,6 +69,7 @@ public:
              minutes = 00;
              day++;
              std::cout << termcolor::magenta << "Наступил новый день! День " << day << termcolor::reset << std::endl;
+             random_qual_custom();
          }
          else if (message == "нет") {
              while (hour >= 24) {
@@ -73,12 +78,30 @@ public:
                  minutes = 00;
                  day++;
                  std::cout << termcolor::magenta << "Наступил новый день! День " << day << termcolor::reset << std::endl;
+                 random_qual_custom();
                  
              }
          }
      }
 
-    void showTime() const {
+    void random_qual_custom() {
+        int random_num = 1 + rand() % 10;
+        quality_customers_day = random_num;
+        std::cout << quality_customers_day << std::endl;       
+    }
+
+    void getCustomerCount() const {
+        std::cout << quality_customers_day << std::endl;
+        
+    }
+
+    void decrementCustomerCount() {
+        if (quality_customers_day > 0)
+            --quality_customers_day;
+    }
+
+    void showTime() const { 
+        getCustomerCount();
         if (minutes > 9)
             std::cout << "День " << day << ", " << hour << ":" << minutes << std::endl << std::endl;
         else
@@ -456,6 +479,20 @@ public:
         std::cout << std::string(3, '\n'); //очищаем экран
     }
 
+    std::map<int, std::string> assigments;
+    int nextAssigId = 1;
+
+    void add_assigm(const std::string& description) {
+        assigments[nextAssigId] = description;
+        nextAssigId++;
+    }
+
+    void printAssigm() {
+        for (const auto& pair : assigments) {
+            std::cout << pair.first << ": " << pair.second << std::endl;
+        }
+    }
+
     void customers() {
         struct Customers {
             std::string name;
@@ -481,7 +518,10 @@ public:
                         slowPrint("💬 Владимир: Надеюсь, сегодня машинка не съест ещё один носок...");
 
                         std::cout << termcolor::blue << "НоВыЙ кВеСт ПоЛуЧеН!" << termcolor::reset << std::endl;
-                        std::cout << "💡 Найди второй носок владимира" << std::endl;
+                        
+                        std::string assigment = "💡 Найди второй носок владимира";
+                        std::cout << assigment << std::endl;
+                        add_assigm(assigment);
                         std::cout << termcolor::bright_grey << "Кажется пора все хорошо сложить.." << termcolor::reset << std::endl;
 
                         this->sock_hunt = true;
@@ -521,16 +561,27 @@ public:
 
         };
 
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<> distrib(0, customer.size() - 1);
-        int index = distrib(gen);
+        clock.getCustomerCount();
+          
+        if (clock.quality_customers_day == 0) {
+            std::cout << "Иногда даже прачечной нужно одиночество." << std::endl;
+        }
+        else {
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<> distrib(0, customer.size() - 1);
 
-        const Customers& c = customer[index];
+            int index = distrib(gen);
 
-        std::cout << termcolor::yellow << c.name << ": " << termcolor::reset;
-        slowPrint(c.text);
-        std::cout << std::endl;
+            const Customers& c = customer[index];
+
+            clock.decrementCustomerCount();
+
+            std::cout << termcolor::yellow << c.name << ": " << termcolor::reset;
+            slowPrint(c.text);
+            std::cout << std::endl;
+        }
+
     }
 
     void give_clothes() {
@@ -700,6 +751,17 @@ public:
                 std::cout << "Все сложено идеально!" << std::endl;
                 clock.advanceTime(0, 30);
             }            
+        };
+
+        activities[nextIndex] = "Посмотреть задания 💡";
+        actions[nextIndex++] = [this]() {
+
+            if (assigments.empty()) {
+                std::cout << "🧺 — Нет заданий в корзине" << std::endl;
+            }
+            else {
+                printAssigm();
+            }
         };
 
         activities[nextIndex] = "Посмотреть в кошелек 💰";
@@ -897,7 +959,11 @@ int main() {
     std::string us_name;
 
     Laundry laundry(us_name);
-    laundry.showMaykaRetroBanner();
+    //laundry.showMaykaRetroBanner();
+    GameClock clock;
+    clock.random_qual_custom();
+    clock.getCustomerCount();
+    
     
     std::cout << termcolor::bright_magenta << "Добро пожаловать в прачечную!🧺\nЗдесь всё крутится вокруг чистоты и уюта\nПрочти краткую инструкцию и помоги первым клиентам освежить свой день!🌞🫧\n\n" << termcolor::reset;
     

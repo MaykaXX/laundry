@@ -478,7 +478,6 @@ public:
 
 class Laundry {
 private:
-    bool sock_hunt = false, has_found_sock_vladimir = false;
     std::string us_name;
     int max_number_of_customers = 0, number_of_customers = 0, amount_clothing_dirty = 0, amount_clothing_clean = 0, level_serviceability = 5;
     float price_washing = 2.0f, price_drying = 1.0f, fine = 0, wallet = 0; // $
@@ -547,7 +546,7 @@ public:
             },
             {"🧔 Владимир", "",
                 [this]() {
-                    if (!has_found_sock_vladimir) {
+                    if (!questFlags.get("has_found_sock_vladimir")) {
                         slowPrint("💬 Владимир: Надеюсь, сегодня машинка не съест ещё один носок...");
 
                         std::cout << termcolor::blue << "НоВыЙ кВеСт ПоЛуЧеН!" << termcolor::reset << std::endl;
@@ -557,7 +556,7 @@ public:
                         add_assigm(assigment);
                         std::cout << termcolor::bright_grey << "Кажется пора все хорошо сложить.." << termcolor::reset << std::endl;
 
-                        this->sock_hunt = true;
+                        questFlags.set("sock_hunt");
                     }
                     else {
                         slowPrint("🧔 Владимир: Сегодня без сюрпризов. Одежда чистая, настроение — тоже.");
@@ -574,27 +573,39 @@ public:
                 slowPrint("У моего мишки грязная лапка. Ты сможешь его постирать? Он не боится!");
                 
                 std::string question;
-                std::cout << "да/нет: ";
-                std::cin >> question;
-                std::cout << std::endl;
+                
+                while(true){
+                    std::cout << "да/нет: ";
+                    std::cin >> question;
+                    std::cout << std::endl;
 
-                if (question == "нет") {
-                    std::cout << name_sofia;
-                    slowPrint("А он и так уже весь пыльный... Ну ладно. Я просто спрячу его под подушку.");
-                    std::cout << "😢" << std::endl;
-                }
-                else if (question == "да") {
-                    questFlags.set("sofia_bear_given");
-                    if (questFlags.get("sofia_bear_given")) {
-                        
-                        questFlags.set("sofia_bear");
+                    if (question == "нет") {
+                        std::cout << name_sofia;
+                        slowPrint("А он и так уже весь пыльный... Ну ладно. Я просто спрячу его под подушку.");
+                        std::cout << "😢" << std::endl;
+                    }
+                    else if (question == "да") {
+                        questFlags.set("sofia_bear_given");
+                        if (questFlags.get("sofia_bear_given")) {
 
-                        std::cout << termcolor::blue << "Получен медведь!" << termcolor::reset << std::endl;
+                            questFlags.set("sofia_bear");
+
+                            std::cout << termcolor::blue << "Получен медведь!" << termcolor::reset << std::endl;
+                        }
+                    }
+                    else {
+                        std::cout << termcolor::red << "Неверный ввод!" << termcolor::reset << std::endl;
                     }
                 }
-
+                    
             }},
-            {"🧑‍🔧 Игорь", "Привет! Кто-то опять забыл ключи от сушилки...", [this]() {}},
+            {"🧑‍🔧 Игорь", "Привет! Кто-то опять забыл ключи от сушилки...", [this]() {
+                
+                std::cout << "🧑‍🔧 Игорь: ";
+                slowPrint("Прачечная — как мини - галактика.Всё крутится, но ничего не понятно.\nЕсли что сломается — зови.Только не ночью, ладно? \nИ вот еще мои рабочие тряпки");
+                
+                questFlags.set("meet_igor");
+            }},
             {"👵 Бабушка Зина", "Сначала всё кипятком, потом полоскать - как в старые добрые времена!", []() {}},
             {"📚 Марк", "Я пока постираю, заодно диплом напишу...", [this]() {}},
             {"🎨 Анна", "Кто-то случайно не находил розовый платок в горошек? 🎀", [this]() {}},
@@ -773,22 +784,58 @@ public:
             if(amount_clothing_dirty == 0) 
                 std::cout << "У тебя нет что стирать!" << std::endl;
             if (level_serviceability == 0) {
-                std::cout << termcolor::italic << "Стиральная машина сломана!\nТребуется для починки 1$" << termcolor::reset << std::endl;
-                
-                std::string pay;
-                
-                std::cout << "[заплатить 1$]" << termcolor::blue << "(space + enter)" << termcolor::reset;
-                
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << termcolor::italic << "Стиральная машина сломана!" << termcolor::reset << std::endl;
 
-                std::getline(std::cin, pay);
+                if (questFlags.get("meet_igor")) {
+                    while (true) {
+                        int enter;
+                        std::cout << "Хочешь починить самостоятельно (1) или позвонить Игорю (2): ";
+                        std::cin >> enter;
 
-                wallet -= 1;
-                level_serviceability = 5;
-                std::cout << termcolor::italic << "Заплачено 1$\nУровень исправности стиральной машины: " << level_serviceability << termcolor::reset << std::endl;
+                        if (enter == 1) {
+                            std::cout << "Требуется для починки 1$" << std::endl;
+
+                            std::string pay;
+
+                            std::cout << "[заплатить 1$]" << termcolor::blue << "(space + enter)" << termcolor::reset;
+
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                            std::getline(std::cin, pay);
+
+                            wallet -= 1;
+                            level_serviceability = 5;
+                            std::cout << termcolor::italic << "Заплачено 1$\nУровень исправности стиральной машины: " << level_serviceability << termcolor::reset << std::endl;
+                            break;
+                        }
+                        else if (enter == 2) {
+                            if (clock.isDaytime()) {
+                                std::cout << "🧑‍🔧 Игорь: ";
+                                slowPrint("Опять перегрузили! Думаете, если три носка — это ещё не стирка?");
+
+                                std::cout << "Процесс ремонта..." << std::endl;
+                                for (int i = 0; i < 3; ++i) {
+                                    Sleep(1000);
+                                    std::cout << "█ ";
+
+                                    std::cout << "🧑‍🔧 Игорь: ";
+                                    slowPrint("Виноват был трансмодульный перегиб с фрагментацией потока.Шутка.Там просто носок застрял.");
+                                    level_serviceability = 5;
+                                    break;
+                                }
+                            }
+                            else {
+                                std::cout << termcolor::bright_red << "🧑‍🔧 Игорь уже спит! Придётся как-то самому..." << termcolor::reset << std::endl;
+                            }
+                        }
+                        else {
+                            std::cout << termcolor::red << "Введите 1 или 2" << termcolor::reset << std::endl;
+                        }
+                    }
+                }
+           
             }
         };
-
 
         activities[nextIndex] = "Ждать посетителей 👀";
         actions[nextIndex++] = [this]() {
@@ -805,9 +852,10 @@ public:
         activities[nextIndex] = "Сложить всё красиво 🌻";
         actions[nextIndex++] = [this]() {
             
-            if (sock_hunt == true) {
+            if (questFlags.get("sock_hunt")) {
                 std::cout << termcolor::bright_cyan << "Носок найден!" << termcolor::reset << std::endl;
-                has_found_sock_vladimir = true;
+                //has_found_sock_vladimir = true;
+                questFlags.set("has_found_sock_vladimir");
 
                 std::cout << termcolor::bright_grey << "Отнести носок Владимиру" << termcolor::reset;
                 wait_for_enter();
@@ -905,8 +953,7 @@ public:
             }
             else {
                 std::cout << "ОЙ, ты нажал что-то другое!" << std::endl;
-            }
-           
+            }         
         }
     }
     

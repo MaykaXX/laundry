@@ -5,5 +5,8 @@ C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(639,72): warning C4267: 
 C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(639,72): warning C4267:             _Ty=int
 C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(639,72): warning C4267:         ]
 C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(1079,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  LINK : C:\Users\tik90\source\repos\laundry\x64\Debug\laundry.exe not found or not built by the last incremental link; performing full link
-  laundry.vcxproj -> C:\Users\tik90\source\repos\laundry\x64\Debug\laundry.exe
+  Generating code
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 1727 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  laundry.vcxproj -> C:\Users\tik90\source\repos\laundry\x64\Release\laundry.exe

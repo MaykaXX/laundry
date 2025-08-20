@@ -1,9 +1,15 @@
 ﻿  laundry.cpp
-C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(639,72): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(639,72): warning C4267:         with
-C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(639,72): warning C4267:         [
-C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(639,72): warning C4267:             _Ty=int
-C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(639,72): warning C4267:         ]
-C:\Users\tik90\source\repos\laundry\laundry\laundry.cpp(1079,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  LINK : C:\Users\tik90\source\repos\laundry\x64\Debug\laundry.exe not found or not built by the last incremental link; performing full link
-  laundry.vcxproj -> C:\Users\tik90\source\repos\laundry\x64\Debug\laundry.exe
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(326,13): error C2027: use of undefined type 'Laundry'
+      C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(50,7):
+      see declaration of 'Laundry'
+  
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(327,13): error C2027: use of undefined type 'Laundry'
+      C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(50,7):
+      see declaration of 'Laundry'
+  
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(752,72): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(752,72): warning C4267:         with
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(752,72): warning C4267:         [
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(752,72): warning C4267:             _Ty=int
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(752,72): warning C4267:         ]
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(1192,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data

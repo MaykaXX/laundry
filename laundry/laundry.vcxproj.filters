@@ -21,6 +21,27 @@
     <ClCompile Include="laundry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Village.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WatchingBirds.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestFlags.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assignment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="instruction.txt" />
@@ -28,6 +49,27 @@
   <ItemGroup>
     <ClInclude Include="termcolor.hpp">
       <Filter>Source Files\termcolor/</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClock.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Laundry.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Village.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WatchingBirds.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestFlags.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assignment.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -127,15 +127,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Assignment.cpp" />
+    <ClCompile Include="GameClock.cpp" />
     <ClCompile Include="laundry.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)termcolor</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="QuestFlags.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Village.cpp" />
+    <ClCompile Include="WatchingBirds.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="instruction.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Assignment.h" />
+    <ClInclude Include="GameClock.h" />
+    <ClInclude Include="Laundry.h" />
+    <ClInclude Include="QuestFlags.h" />
     <ClInclude Include="termcolor.hpp" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Village.h" />
+    <ClInclude Include="WatchingBirds.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

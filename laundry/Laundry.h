@@ -52,6 +52,7 @@ public:
     void check_day();
     void list_activity();
     void add_assigm(const std::string& desc);
+    void removeAssignmentByText(const std::string& text);
     void add_pro_assig(const std::string& desc, const std::vector<std::string>& subs);
     void print_Assigm();
     void completeSubTask(int id, const std::string& item);

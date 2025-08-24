@@ -2,6 +2,8 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include "Laundry.h"
+
 
 void slowPrint(const std::string& text, int delay) {
     for (char c : text) {
@@ -30,5 +32,10 @@ void showMaykaRetroBanner() {
 }
 
 void print_name(const std::string& name) {
-    std::cout << name;
+    std::cout << name << ": ";
+}
+
+void print_user_name(const std::string& name) {
+    std::string n = "👤" + name + ": ";
+    std::cout << n;
 }

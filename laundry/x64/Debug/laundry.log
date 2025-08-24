@@ -1,29 +1,12 @@
-﻿  main.cpp
-C:\Users\hwang\source\repos\laundry1\laundry\QuestFlags.h(1,1): warning C4828: The file contains a character starting at offset 0x9f that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\hwang\source\repos\laundry1\laundry\QuestFlags.h(1,1): warning C4828: The file contains a character starting at offset 0xa3 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\hwang\source\repos\laundry1\laundry\QuestFlags.h(1,1): warning C4828: The file contains a character starting at offset 0xa6 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\hwang\source\repos\laundry1\laundry\QuestFlags.h(1,1): warning C4828: The file contains a character starting at offset 0xa9 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\hwang\source\repos\laundry1\laundry\QuestFlags.h(1,1): warning C4828: The file contains a character starting at offset 0xad that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\hwang\source\repos\laundry1\laundry\Village.h(1,1): warning C4828: The file contains a character starting at offset 0x19e that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\hwang\source\repos\laundry1\laundry\Village.h(1,1): warning C4828: The file contains a character starting at offset 0x1a0 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\hwang\source\repos\laundry1\laundry\Village.h(1,1): warning C4828: The file contains a character starting at offset 0x1a3 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
-C:\Users\hwang\source\repos\laundry1\laundry\Village.h(1,1): warning C4828: The file contains a character starting at offset 0x1a7 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'main.cpp')
-  
+﻿  Assignment.cpp
+  Utils.cpp
+  Village.cpp
+  main.cpp
+  Generating Code...
+  laundry.cpp
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(276,68): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(276,68): warning C4267:         with
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(276,68): warning C4267:         [
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(276,68): warning C4267:             _Ty=int
+C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(276,68): warning C4267:         ]
   laundry.vcxproj -> C:\Users\hwang\source\repos\laundry1\x64\Debug\laundry.exe

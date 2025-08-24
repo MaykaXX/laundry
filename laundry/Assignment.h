@@ -5,9 +5,10 @@
 #include <algorithm> 
 
 class Assignment {
-public:
+private:
     std::string description;
     std::vector<std::string> subTasks;
+public:
 
     Assignment();
     Assignment(const std::string& desc);
@@ -15,4 +16,7 @@ public:
 
     void print() const;
     void completeSubTask(const std::string& item);
+
+    std::string getDescription() const { return description; }
+
 };

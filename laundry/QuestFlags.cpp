@@ -1,22 +1,22 @@
-#include "QuestFlags.h"
+п»ї#include "QuestFlags.h"
 
-// Установка флага
+// РЈСЃС‚Р°РЅРѕРІРєР° С„Р»Р°РіР°
 void QuestFlags::set(const std::string& name, bool value) {
     flags[name] = value;
 }
 
-// Получение значения флага
+// РџРѕР»СѓС‡РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С„Р»Р°РіР°
 bool QuestFlags::get(const std::string& name) const {
     auto it = flags.find(name);
     return it != flags.end() ? it->second : false;
 }
 
-// Удаление флага
+// РЈРґР°Р»РµРЅРёРµ С„Р»Р°РіР°
 void QuestFlags::vlear(const std::string& name) {
     flags.erase(name);
 }
 
-// Очистка всех флагов
+// РћС‡РёСЃС‚РєР° РІСЃРµС… С„Р»Р°РіРѕРІ
 void QuestFlags::reset() {
     flags.clear();
 }

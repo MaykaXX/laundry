@@ -1,6 +1,6 @@
-#include "Assignment.h"
+п»ї#include "Assignment.h"
 
-// Конструкторы
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹
 Assignment::Assignment() = default;
 
 Assignment::Assignment(const std::string& desc) : description(desc) {}
@@ -23,9 +23,9 @@ void Assignment::completeSubTask(const std::string& item) {
     auto it = std::find(subTasks.begin(), subTasks.end(), item);
     if (it != subTasks.end()) {
         subTasks.erase(it);
-        std::cout << "Подзадача \"" << item << "\" выполнена и удалена!\n";
+        std::cout << "РџРѕРґР·Р°РґР°С‡Р° \"" << item << "\" РІС‹РїРѕР»РЅРµРЅР° Рё СѓРґР°Р»РµРЅР°!\n";
     }
     else {
-        std::cout << "Такой подзадачи нет.\n";
+        std::cout << "РўР°РєРѕР№ РїРѕРґР·Р°РґР°С‡Рё РЅРµС‚.\n";
     }
 }

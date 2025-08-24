@@ -1,4 +1,4 @@
-#include "Utils.h"
+ï»¿#include "Utils.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -24,7 +24,7 @@ void showMaykaRetroBanner() {
                       `--------` '.(_,_).'   ``-'`-'' '--'    '--''-----'`    ''-'   `'-'    `-..-'        
                                                                                        
         )";
-    std::cout << "\033[1;36m"; // Ãîëóáîé ñòèëü
+    std::cout << "\033[1;36m"; // Ð“Ð¾Ð»ÑƒÐ±Ð¾Ð¹ ÑÑ‚Ð¸Ð»ÑŒ
     std::cout << banner;
     std::cout << "\033[0m\n";
 }

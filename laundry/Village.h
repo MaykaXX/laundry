@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <string>
 #include "GameClock.h"
 #include <vector>
@@ -21,7 +21,7 @@ private:
 
     bool unlock_new_buildings = false;
 public:
-    // Конструктор
+    // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
     Village(Laundry& l, GameClock& c);
 
     void message_village();

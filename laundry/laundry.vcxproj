@@ -127,16 +127,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Assignment.cpp" />
-    <ClCompile Include="GameClock.cpp" />
+    <ClCompile Include="Assignment.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/utf-8
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="GameClock.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </AdditionalIncludeDirectories>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/utf-8
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="laundry.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)termcolor</AdditionalIncludeDirectories>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/utf-8
+ %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="QuestFlags.cpp" />
-    <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="Village.cpp" />
-    <ClCompile Include="WatchingBirds.cpp" />
+    <ClCompile Include="main.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/utf-8
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="QuestFlags.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/utf-8
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/utf-8
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="Village.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/utf-8
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="WatchingBirds.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/utf-8
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="instruction.txt" />

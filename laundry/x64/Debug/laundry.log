@@ -1,41 +1,29 @@
-﻿  Village.cpp
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(16,37): warning C4566: character represented by universal-character-name '\u2554' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(16,37): warning C4566: character represented by universal-character-name '\u2550' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(16,37): warning C4566: character represented by universal-character-name '\u2557' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(17,18): warning C4566: character represented by universal-character-name '\u2551' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(20,22): warning C4566: character represented by universal-character-name '\u2551' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(23,51): warning C4566: character represented by universal-character-name '\u2551' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(26,18): warning C4566: character represented by universal-character-name '\u2551' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(27,37): warning C4566: character represented by universal-character-name '\u255A' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(27,37): warning C4566: character represented by universal-character-name '\u2550' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(27,37): warning C4566: character represented by universal-character-name '\u255D' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(39,22): warning C4566: character represented by universal-character-name '\U0001F474' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(45,22): warning C4566: character represented by universal-character-name '\U0001F475' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(83,17): warning C4566: character represented by universal-character-name '\U0001F3E1' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(84,17): warning C4566: character represented by universal-character-name '\U0001F9FA' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(90,18): warning C4566: character represented by universal-character-name '\U0001F3E1' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(91,18): warning C4566: character represented by universal-character-name '\U0001F9FA' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(92,18): warning C4566: character represented by universal-character-name '\U0001F9F1' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(93,18): warning C4566: character represented by universal-character-name '\U0001F956' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(94,18): warning C4566: character represented by universal-character-name '\U0001F4D6' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(116,33): warning C4566: character represented by universal-character-name '\U0001F474' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(116,56): warning C4566: character represented by universal-character-name '\U0001F475' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(129,32): warning C4566: character represented by universal-character-name '\U0001F528' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(129,64): warning C4566: character represented by universal-character-name '\U0001F4D0' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(129,101): warning C4566: character represented by universal-character-name '\U0001F426' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(148,33): warning C4566: character represented by universal-character-name '\U0001F35E' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(148,69): warning C4566: character represented by universal-character-name '\U0001F6B2' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(148,103): warning C4566: character represented by universal-character-name '\U0001F9C1' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(166,36): warning C4566: character represented by universal-character-name '\U0001F4D6' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(166,78): warning C4566: character represented by universal-character-name '\u270F' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(166,78): warning C4566: character represented by universal-character-name '\uFE0F' cannot be represented in the current code page (1251)
-C:\Users\hwang\source\repos\laundry1\laundry\Village.cpp(166,124): warning C4566: character represented by universal-character-name '\U0001F320' cannot be represented in the current code page (1251)
-  main.cpp
-  Generating Code...
-  laundry.cpp
-C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(199,68): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(199,68): warning C4267:         with
-C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(199,68): warning C4267:         [
-C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(199,68): warning C4267:             _Ty=int
-C:\Users\hwang\source\repos\laundry1\laundry\laundry.cpp(199,68): warning C4267:         ]
+﻿  main.cpp
+C:\Users\hwang\source\repos\laundry1\laundry\QuestFlags.h(1,1): warning C4828: The file contains a character starting at offset 0x9f that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\hwang\source\repos\laundry1\laundry\QuestFlags.h(1,1): warning C4828: The file contains a character starting at offset 0xa3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\hwang\source\repos\laundry1\laundry\QuestFlags.h(1,1): warning C4828: The file contains a character starting at offset 0xa6 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\hwang\source\repos\laundry1\laundry\QuestFlags.h(1,1): warning C4828: The file contains a character starting at offset 0xa9 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\hwang\source\repos\laundry1\laundry\QuestFlags.h(1,1): warning C4828: The file contains a character starting at offset 0xad that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\hwang\source\repos\laundry1\laundry\Village.h(1,1): warning C4828: The file contains a character starting at offset 0x19e that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\hwang\source\repos\laundry1\laundry\Village.h(1,1): warning C4828: The file contains a character starting at offset 0x1a0 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\hwang\source\repos\laundry1\laundry\Village.h(1,1): warning C4828: The file contains a character starting at offset 0x1a3 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
+C:\Users\hwang\source\repos\laundry1\laundry\Village.h(1,1): warning C4828: The file contains a character starting at offset 0x1a7 that is illegal in the current source character set (codepage 65001).
+  (compiling source file 'main.cpp')
+  
   laundry.vcxproj -> C:\Users\hwang\source\repos\laundry1\x64\Debug\laundry.exe

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 
 void slowPrint(const std::string& text, int delay = 10);

@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <windows.h>
 #include "GameClock.h"
 #include "Laundry.h"
@@ -18,9 +18,9 @@ int main() {
     showMaykaRetroBanner();
     clock.random_qual_custom();
 
-    std::cout << "Как тебя зовут: ";
+    std::cout << "РљР°Рє С‚РµР±СЏ Р·РѕРІСѓС‚: ";
     std::cin >> us_name;
-    std::cout << "Добро пожаловать, " << us_name << "!" << std::endl;
+    std::cout << "Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ, " << us_name << "!" << std::endl;
 
     QuestFlags questFlags;
     Laundry laundry(us_name, clock, questFlags);
